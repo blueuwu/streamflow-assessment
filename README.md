@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StreamFlow Airdrop App
+
+A simple web app for claiming StreamFlow airdrops on Solana. Connect your Phantom wallet to view available airdrops and claim your tokens.
+
+## Features
+
+- Connect your Phantom wallet
+- Browse recent available airdrops
+- View airdrop details (type, recipients, amounts)
+- Check your eligibility and allocation
+- Claim your tokens directly from the app
+
+## Tech Stack
+
+Built with React, Next.js, TypeScript, and Tailwind CSS. Uses the StreamFlow JS SDK and Solana wallet adapter.
 
 ## Getting Started
 
-First, run the development server:
+You'll need Node.js 18+ and the Phantom wallet extension.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will run at http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Make sure your Phantom wallet is set to Devnet. You can get free devnet SOL from a Solana faucet if needed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Future Improvements
 
-## Learn More
+- Advanced search and filtering options
+- Sorting by different criteria (amount, date, etc.)
+- USD value display for token amounts
+- Claim history tracking
+- Push notifications for new airdrops
 
-To learn more about Next.js, take a look at the following resources:
+## Main Files
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Here's what the key files in the project do:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**src/app/page.tsx** - This is the main home page where users see the latest airdrops and can search for specific ones. It shows a grid of airdrop cards and handles loading states.
 
-## Deploy on Vercel
+**src/lib/streamflow.ts** - The core file that talks to the StreamFlow API. It handles fetching airdrop data, checking user eligibility, and processing claims.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**src/components/airdrops-grid.tsx** - Creates the table layout that displays airdrop cards on the home page. Each card shows basic info like the airdrop name, amount, and claim status.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**src/components/navbar.tsx** - The top navigation bar with the wallet connection button and theme toggle. It shows the user's wallet address when connected.
+
+**src/app/airdrop/[id]/page.tsx** - The detailed page for individual airdrops where users can see full details and claim their tokens if eligible.
+
+**src/hooks/useGetAirdropsQuery.ts** - A React Query hook that manages fetching airdrop data from the API. It handles caching, loading states, and retries.
+
+**src/lib/error-handler.ts** - Utilities for handling errors gracefully throughout the app. It includes retry logic and proper error messaging.
+
+**src/types/errors.ts** - TypeScript definitions for different error types that can occur when interacting with the StreamFlow API.
+
+## Resources
+
+- [StreamFlow JS SDK](https://docs.streamflow.finance/SDKs/js-sdk/overview)
+- [StreamFlow API Docs](https://docs.streamflow.finance/API/public-api/overview)
+- [Solana Wallet Adapter](https://github.com/solana-labs/wallet-adapter)
